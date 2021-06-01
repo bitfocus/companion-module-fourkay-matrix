@@ -1,0 +1,24 @@
+{
+	"name": "fourkay-hdmi8x8",
+	"version": "1.0.0",
+	"api_version": "1.0.0",
+	"keywords": [ "HDMI Matrix" ],
+	"manufacturer": "Fourkay",
+	"product": "8x8",
+	"shortname": "8x8",
+	"description": "Matrix switcher 8x8",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/bitfocus/companion-module-fourkay-hdmi8x8.git"
+	},
+	"author": "James Rankin <james@rankinfamily.com>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/bitfocus/companion-module-fourkay-matrix/issues"
+	},
+	"homepage": "https://github.com/bitfocus/companion-module-fourkay-matrix#readme"
+}
