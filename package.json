@@ -1,5 +1,5 @@
 {
-	"name": "fourkay-hdmi8x8",
+	"name": "fourkay-matrix",
 	"version": "1.0.0",
 	"api_version": "1.0.0",
 	"keywords": [ "HDMI Matrix" ],
@@ -13,7 +13,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/bitfocus/companion-module-fourkay-hdmi8x8.git"
+		"url": "git+https://github.com/bitfocus/companion-module-fourkay-matrix.git"
 	},
 	"author": "James Rankin <james@rankinfamily.com>",
 	"license": "MIT",

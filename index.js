@@ -1,7 +1,4 @@
 // Fourkay 8x8 HDMI Matrix Switch
-// test messaging
-// process responses with feedbacks
-// turn off local switch into array and drive using response processing
 
 let tcp = require('../../tcp');
 let instance_skel = require('../../instance_skel');
@@ -44,6 +41,13 @@ class instance extends instance_skel {
 			delete this.pollMixerTimer
 		}
 		this.config = config
+
+		this.config.polling_interval =
+		this.config.polling_interval !== undefined
+		  ? this.config.polling_interval
+		  : 500;
+
+
 		this.initActions()
 		this.initFeedbacks()
 		this.init_tcp()
@@ -90,7 +94,7 @@ class instance extends instance_skel {
 		for (let response of allresponses) {
 			if (response.length > 0) {
 				if (response.length != 2) {
-					this.log('error, unexpected response')
+					this.log('error, unexpected response: ' + response)
 				} else {
 					let input = response.charAt(0)
 					let output = response.charAt(1)
@@ -141,7 +145,7 @@ class instance extends instance_skel {
 			id: 'port',
 			label: 'IP Port',
 			width: 6,
-			default: '23',
+			default: '22',
 			regex: this.REGEX_PORT,
 			},
 			{
@@ -206,32 +210,23 @@ class instance extends instance_skel {
 
 	action(action) {
 		let options = action.options
-
 		switch (action.action) {
 			case 'select_input':
 				this.selectedInput = options.input-1
-				console.log('select: ' + this.selectedInput + ' : ' + (options.input-1).toString())
 				break
 			case 'switch_output':
 				this.sendCommmand('cir ' + this.selectedInput.toString() + (options.output-1).toString())
-				//this.outputSet[options.output-1] = this.selectedInput
-				//console.log('set input: '+this.selectedInput.toString()+' to output: '+options.output.toString())
 				break
 			case 'all':
-				//console.log('all')
-				//console.log(this.selectedInput.toString())
 				for (let i = 0; i <= 7; i++) {
-					this.sendCommmand('cir ' + (this.selectedInput + i).toString())
-					//this.outputSet[i] = this.selectedInput
+					this.sendCommmand('cir ' + this.selectedInput.toString() + i)
 				}
-				//console.log(this.outputSet)
 				break
 			case 'test':
 				this.processResponse(options.test)
 				break
 		}
 		this.checkFeedbacks()
-		console.log(this.outputSet)
 	}
 
 	initFeedbacks() {
